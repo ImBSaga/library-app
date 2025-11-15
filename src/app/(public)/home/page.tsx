@@ -3,6 +3,7 @@
 import Header from './partials/header';
 import { useCategories } from '@/hooks/useCategories';
 import { useBooks } from '@/hooks/useBooks';
+import Link from 'next/link';
 
 export default function Home() {
   const {
@@ -46,9 +47,13 @@ export default function Home() {
             <h2 className='text-2xl font-bold mb-4'>Books</h2>
             <div className='grid grid-cols-4 gap-4'>
               {books.map((book) => (
-                <div key={book.id} className='p-4 border rounded-lg'>
+                <Link
+                  href={`/books/${book.id}`}
+                  key={book.id}
+                  className='p-4 border rounded-lg cursor-pointer'
+                >
                   {book.title}
-                </div>
+                </Link>
               ))}
             </div>
           </div>

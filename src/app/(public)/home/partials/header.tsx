@@ -2,6 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 
@@ -19,6 +20,7 @@ const Header = () => {
           width={28}
           height={28}
           className='h-7 w-7 md:h-10 md:w-10'
+          loading='eager'
         />
 
         <div className='flex items-center gap-2'>
@@ -108,7 +110,7 @@ const Header = () => {
             <p>Login</p>
           </div>
           <div>
-            <a href='/register'>Register</a>
+            <Link href='/register'>Register</Link>
           </div>
         </div>
 

@@ -29,6 +29,35 @@ export type Book = {
   category: Category;
 };
 
+// Details
+export type AuthorDetail = Author & {
+  bio: string;
+  createdAt: string;
+  updatedAt: string;
+};
+export type CategoryDetail = Category & {
+  createdAt: string;
+  updatedAt: string;
+};
+export type Review = {
+  id: number;
+  star: number;
+  comment: string;
+  userId: number;
+  bookId: number;
+  createdAt: string;
+  user: User;
+};
+export type User = {
+  id: number;
+  name: string;
+};
+export type BookDetail = Omit<Book, 'author' | 'category'> & {
+  author: AuthorDetail;
+  category: CategoryDetail;
+  reviews: Review[];
+};
+
 // Get Recommend Books
 export type GetRecommendBooksRequest = {
   by: string;
@@ -42,4 +71,11 @@ export type GetRecommendBooksResponse = {
     mode: string;
     books: Book[];
   };
+};
+
+// Get Book by ID
+export type GetBookDetailResponse = {
+  success: boolean;
+  message: string;
+  data: BookDetail;
 };

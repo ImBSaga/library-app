@@ -90,7 +90,7 @@ const RegisterForm = () => {
         {/* Login link */}
 
         <p>
-          Already have an account? <a href='/login'>Login</a>
+          Already have an account? <Link href='/login'>Login</Link>
         </p>
 
         {/* Status */}
