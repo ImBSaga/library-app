@@ -1,11 +1,14 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import { useState } from 'react';
+import { useAuth } from '@/providers/AuthProvider';
 
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const { logout } = useAuth();
 
   return (
     <header className='fixed top-0 z-50 w-full'>
@@ -113,7 +116,7 @@ const Header = () => {
           <p>Profile</p>
           <p>Borrowed List</p>
           <p>Reviews</p>
-          <p>Logout</p>
+          <Button onClick={logout}>Logout</Button>
         </div>
       </div>
     </header>

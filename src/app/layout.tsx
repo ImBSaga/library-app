@@ -2,6 +2,9 @@ import clsx from 'clsx';
 import type { Metadata } from 'next';
 import './globals.css';
 
+// AppProvider
+import { AppProvider } from '@/providers/AppProvider';
+
 // Font
 import { Quicksand } from 'next/font/google';
 const quicksand = Quicksand({
@@ -24,7 +27,7 @@ export default function RootLayout({
   return (
     <html lang='en'>
       <body className={clsx(quicksand.variable, 'antialiased')}>
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );
