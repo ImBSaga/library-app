@@ -1,6 +1,6 @@
 'use client';
 
-import Header from './partials/header';
+import Header from '@/components/container/Header';
 import { useCategories } from '@/hooks/useCategories';
 import { useBooks } from '@/hooks/useBooks';
 import Link from 'next/link';
