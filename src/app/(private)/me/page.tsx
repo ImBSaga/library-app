@@ -1,17 +1,15 @@
-// app/cart/page.tsx
 'use client';
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Header from '@/components/container/Header';
 import { useRouter, useSearchParams } from 'next/navigation';
-import { useMe } from '@/hooks/useMe';
+import ProfileTab from './partials/profile-tab';
+import BorrowedListTab from './partials/borrowed-list-tab';
 
 export default function MePage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const tab = searchParams.get('tab') || 'profile';
-
-  const { me, isLoadingMe, hasError: isMeError } = useMe();
 
   return (
     <>
@@ -27,17 +25,10 @@ export default function MePage() {
             <TabsTrigger value='reviews'>Reviews</TabsTrigger>
           </TabsList>
           <TabsContent value='profile'>
-            {isLoadingMe ? (
-              <p>Loading...</p>
-            ) : (
-              <>
-                <p>name: {me?.profile?.name}</p>
-                <p>email: {me?.profile?.email}</p>
-              </>
-            )}
+            <ProfileTab />
           </TabsContent>
           <TabsContent value='borrowed-list'>
-            <p>Borrowed List content</p>
+            <BorrowedListTab />
           </TabsContent>
           <TabsContent value='reviews'>
             <p>Reviews content</p>
