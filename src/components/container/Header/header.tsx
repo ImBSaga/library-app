@@ -20,14 +20,16 @@ const Header = () => {
   return (
     <header className='fixed top-0 z-50 w-full'>
       <div className='flex-between custom-container h-16 md:h-21'>
-        <Image
-          src='/icons/icon-logo.svg'
-          alt='logo'
-          width={28}
-          height={28}
-          className='h-7 w-7 md:h-10 md:w-10'
-          loading='eager'
-        />
+        <Link href='/'>
+          <Image
+            src='/icons/icon-logo.svg'
+            alt='logo'
+            width={28}
+            height={28}
+            className='h-7 w-7 md:h-10 md:w-10'
+            loading='eager'
+          />
+        </Link>
 
         <div className='flex items-center gap-2'>
           <div className={`flex ${searchOpen ? 'block' : 'hidden'}`}>

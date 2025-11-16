@@ -13,6 +13,10 @@ export type Loan = {
   borrowedAt: string;
   dueAt: string;
   returnedAt: any;
+};
+
+// My Loan
+export type MyLoan = Loan & {
   book: Book;
 };
 
@@ -21,6 +25,28 @@ export type GetMyLoansResponse = {
   success: boolean;
   message: string;
   data: {
-    loans: Loan[];
+    loans: MyLoan[];
+  };
+};
+
+// Create Loan Book
+export type CreateLoanRequest = {
+  bookId: number;
+  days: number;
+};
+export type CreateLoanResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    loan: Loan;
+  };
+};
+
+// Return Book
+export type ReturnLoanResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    loan: Loan;
   };
 };

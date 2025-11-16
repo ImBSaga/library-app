@@ -139,7 +139,9 @@ export default function Home() {
                     key={book.id}
                     className='p-4 border rounded-lg cursor-pointer flex flex-col gap-2'
                   >
-                    <Link href={`/books/${book.id}`}>{book.title}</Link>
+                    <Link href={`/books/${book.id}`}>
+                      Judul Buku: {book.title}
+                    </Link>
                     <div
                       onClick={() =>
                         setSelectedAuthor({
@@ -149,7 +151,9 @@ export default function Home() {
                       }
                       className='mt-2'
                     >
-                      <h3 className='font-display-2xl'> {book.author.name}</h3>
+                      <h3 className='font-display-2xl'>
+                        Penulis: {book.author.name}
+                      </h3>
                     </div>
                   </div>
                 ))}
