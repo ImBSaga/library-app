@@ -1,4 +1,4 @@
-// Types
+// Primary Types
 export type Category = {
   id: number;
   name: string;
@@ -25,20 +25,13 @@ export type Book = {
   categoryId: number;
   createdAt: string;
   updatedAt: string;
-  author: Author;
-  category: Category;
 };
 
-// Details
-export type AuthorDetail = Author & {
-  bio: string;
-  createdAt: string;
-  updatedAt: string;
+export type User = {
+  id: number;
+  name: string;
 };
-export type CategoryDetail = Category & {
-  createdAt: string;
-  updatedAt: string;
-};
+
 export type Review = {
   id: number;
   star: number;
@@ -48,15 +41,33 @@ export type Review = {
   createdAt: string;
   user: User;
 };
-export type User = {
-  id: number;
-  name: string;
+
+// Extend Details
+export type AuthorDetail = Author & {
+  bio: string;
+  createdAt: string;
+  updatedAt: string;
 };
-export type BookDetail = Omit<Book, 'author' | 'category'> & {
+export type CategoryDetail = Category & {
+  createdAt: string;
+  updatedAt: string;
+};
+
+// Recommend Books
+export type RecommendBooks = Book & {
+  author: Author;
+  category: Category;
+};
+
+// Book Detail
+export type BookDetail = Book & {
   author: AuthorDetail;
   category: CategoryDetail;
   reviews: Review[];
 };
+
+// All Books
+export type AllBooks = Omit<BookDetail, 'reviews'>;
 
 // Get Recommend Books
 export type GetRecommendBooksRequest = {
@@ -69,7 +80,7 @@ export type GetRecommendBooksResponse = {
   message: string;
   data: {
     mode: string;
-    books: Book[];
+    books: RecommendBooks[];
   };
 };
 
@@ -78,4 +89,26 @@ export type GetBookDetailResponse = {
   success: boolean;
   message: string;
   data: BookDetail;
+};
+
+// Get All Books
+export type GetAllBooksRequest = {
+  q?: string;
+  categoryId?: number;
+  authorId?: number;
+  page?: number;
+  limit?: number;
+};
+export type GetAllBooksResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    books: AllBooks[];
+    pagination: {
+      page: number;
+      limit: number;
+      total: number;
+      totalPages: number;
+    };
+  };
 };

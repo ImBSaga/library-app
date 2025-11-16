@@ -3,6 +3,8 @@ import type {
   GetRecommendBooksResponse,
   GetRecommendBooksRequest,
   GetBookDetailResponse,
+  GetAllBooksResponse,
+  GetAllBooksRequest,
 } from '@/types/Books.type';
 
 const prefix = '/api/books';
@@ -18,5 +20,13 @@ export async function getRecommendBooks(params?: GetRecommendBooksRequest) {
 // Get Book Detail
 export async function getBookDetail(id: number) {
   const res = await api.get<GetBookDetailResponse>(`${prefix}/${id}`);
+  return res.data;
+}
+
+// Get All Books
+export async function getAllBooks(params?: GetAllBooksRequest) {
+  const res = await api.get<GetAllBooksResponse>(`${prefix}`, {
+    params,
+  });
   return res.data;
 }
