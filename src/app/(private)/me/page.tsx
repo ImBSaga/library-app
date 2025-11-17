@@ -5,6 +5,7 @@ import Header from '@/components/container/Header';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ProfileTab from './partials/profile-tab';
 import BorrowedListTab from './partials/borrowed-list-tab';
+import ReviewsTab from './partials/reviews-tab';
 
 export default function MePage() {
   const router = useRouter();
@@ -31,7 +32,7 @@ export default function MePage() {
             <BorrowedListTab />
           </TabsContent>
           <TabsContent value='reviews'>
-            <p>Reviews content</p>
+            <ReviewsTab />
           </TabsContent>
         </Tabs>
       </main>

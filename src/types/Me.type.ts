@@ -14,6 +14,29 @@ export type LoanStats = {
   total: number;
 };
 
+export type Pagination = {
+  page: number;
+  limit: number;
+  total: number;
+  totalPages: number;
+};
+
+export type Book = {
+  id: number;
+  title: string;
+  coverImage: any;
+};
+
+export type Review = {
+  id: number;
+  star: number;
+  comment: string;
+  userId: number;
+  bookId: number;
+  createdAt: string;
+  book: Book;
+};
+
 // Get Me
 export type GetMeResponse = {
   success: boolean;
@@ -22,5 +45,19 @@ export type GetMeResponse = {
     profile: Profile;
     loanStats: LoanStats;
     reviewsCount: number;
+  };
+};
+
+// Get Me Reviews
+export type GetMeReviewsRequest = {
+  page: number;
+  limit: number;
+};
+export type GetMeReviewsResponse = {
+  success: boolean;
+  message: string;
+  data: {
+    reviews: Review[];
+    pagination: Pagination;
   };
 };
