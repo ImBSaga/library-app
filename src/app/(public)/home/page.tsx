@@ -66,7 +66,7 @@ export default function Home() {
           <h2 className='text-2xl font-bold mb-4'>Book List</h2>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant='outline'>
+              <Button variant='default'>
                 {selectedCategory
                   ? categories.find((c) => c.id === selectedCategory)?.name
                   : 'Categories'}
