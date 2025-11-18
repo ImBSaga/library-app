@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { useState } from 'react';
 
 // Shadcn
 import { Button } from '@/components/ui/button';
@@ -11,9 +12,11 @@ import {
   FormControl,
   FormMessage,
 } from '@/components/ui/form';
+import { Eye, EyeOff } from 'lucide-react';
 
 // Hooks
 import { useLogin } from '@/hooks/useAuth';
+import { InputIcon } from '@/components/ui/input-icon';
 const LoginForm = () => {
   const {
     register,
@@ -27,9 +30,10 @@ const LoginForm = () => {
     form,
   } = useLogin();
 
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <Form {...form}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
         {/* Email */}
         <FormField
           name='email'
@@ -55,9 +59,11 @@ const LoginForm = () => {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input
-                  type='password'
+                <InputIcon
+                  type={showPassword ? 'text' : 'password'}
                   placeholder='••••••••'
+                  icon={showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  onIconClick={() => setShowPassword((prev) => !prev)}
                   {...register('password')}
                 />
               </FormControl>
@@ -71,9 +77,13 @@ const LoginForm = () => {
           {isPending ? 'Logging in...' : 'Login'}
         </Button>
 
-        <p>
-          Don't have an account? <Link href='/register'>Register</Link>
-        </p>
+        {/* Register */}
+        <div className='flex-center gap-1 text-text-sm font-semibold text-neutral-950 md:text-text-md'>
+          <p>Don't have an account?</p>
+          <Link href='/register' className='text-primary-500'>
+            Register
+          </Link>
+        </div>
 
         {/* Status messages */}
         {isError && (

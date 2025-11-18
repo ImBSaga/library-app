@@ -11,6 +11,9 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { InputIcon } from '@/components/ui/input-icon';
+import { Eye, EyeOff } from 'lucide-react';
+import { useState } from 'react';
 
 // Hooks
 import { useRegister } from '@/hooks/useAuth';
@@ -19,9 +22,14 @@ const RegisterForm = () => {
   const { form, onSubmit, isPending, isError, error, isSuccess } =
     useRegister();
 
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)}>
+      <form
+        className='flex flex-col gap-4'
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
         {/* Name */}
         <FormField
           control={form.control}
@@ -53,7 +61,7 @@ const RegisterForm = () => {
         />
 
         {/* Password */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name='password'
           render={({ field }) => (
@@ -65,10 +73,30 @@ const RegisterForm = () => {
               <FormMessage />
             </FormItem>
           )}
+        /> */}
+
+        <FormField
+          control={form.control}
+          name='password'
+          render={() => (
+            <FormItem>
+              <FormLabel>Password</FormLabel>
+              <FormControl>
+                <InputIcon
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='••••••••'
+                  icon={showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  onIconClick={() => setShowPassword((prev) => !prev)}
+                  {...form.register('password')}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         {/* Confirm Password */}
-        <FormField
+        {/* <FormField
           control={form.control}
           name='confirmPassword'
           render={({ field }) => (
@@ -80,18 +108,40 @@ const RegisterForm = () => {
               <FormMessage />
             </FormItem>
           )}
+        /> */}
+
+        <FormField
+          control={form.control}
+          name='confirmPassword'
+          render={() => (
+            <FormItem>
+              <FormLabel>Confirm Password</FormLabel>
+              <FormControl>
+                <InputIcon
+                  type={showPassword ? 'text' : 'password'}
+                  placeholder='••••••••'
+                  icon={showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  onIconClick={() => setShowPassword((prev) => !prev)}
+                  {...form.register('confirmPassword')}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
         />
 
         {/* Submit */}
         <Button type='submit' className='w-full' disabled={isPending}>
-          {isPending ? 'Registering...' : 'Register'}
+          {isPending ? 'Registering...' : 'Submit'}
         </Button>
 
         {/* Login link */}
-
-        <p>
-          Already have an account? <Link href='/login'>Login</Link>
-        </p>
+        <div className='flex-center gap-1 text-text-sm font-semibold text-neutral-950 md:text-text-md'>
+          <p>Already have an account?</p>
+          <Link href='/login' className='text-primary-500'>
+            Login
+          </Link>
+        </div>
 
         {/* Status */}
         {isError && (

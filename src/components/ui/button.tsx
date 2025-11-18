@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@/lib/utils';
 
-const buttonVariants = cva('text-md font-bold rounded-[100px]', {
+const buttonVariants = cva('text-text-md font-bold rounded-[100px]', {
   variants: {
     variant: {
       default: 'bg-primary-500 text-neutral-25 hover:bg-primary-500/90',
