@@ -5,6 +5,9 @@ import './globals.css';
 // AppProvider
 import { AppProvider } from '@/providers/AppProvider';
 
+// SearchProvider
+import { SearchProvider } from '@/providers/SearchProvider';
+
 // Font
 import { Quicksand } from 'next/font/google';
 const quicksand = Quicksand({
@@ -27,7 +30,9 @@ export default function RootLayout({
   return (
     <html lang='en' data-scroll-behavior='smooth'>
       <body className={clsx(quicksand.variable, 'antialiased')}>
-        <AppProvider>{children}</AppProvider>
+        <AppProvider>
+          <SearchProvider>{children}</SearchProvider>
+        </AppProvider>
       </body>
     </html>
   );

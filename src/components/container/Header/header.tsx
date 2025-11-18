@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
+import { useSearch } from '@/providers/SearchProvider';
 import { useRouter } from 'next/navigation';
 
 const Header = () => {
@@ -12,6 +13,7 @@ const Header = () => {
   const [open, setOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const { logout, user } = useAuth();
+  const { search, setSearch } = useSearch();
 
   const handleBagClick = () => {
     router.push('/cart');
@@ -60,7 +62,13 @@ const Header = () => {
                   height={24}
                   className='cursor-pointer'
                 />
-                <input type='text' placeholder='Search' className='flex-1' />
+                <input
+                  type='text'
+                  placeholder='Search'
+                  className='flex-1'
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                />
               </div>
             </div>
           ) : (
@@ -141,6 +149,8 @@ const Header = () => {
               <input
                 type='text'
                 placeholder='Search Book'
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
                 className='w-full '
               />
             </div>

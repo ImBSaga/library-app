@@ -5,6 +5,7 @@ import { useCategories } from '@/hooks/useCategories';
 import { useBooks } from '@/hooks/useBooks';
 import Link from 'next/link';
 import { useState, useMemo } from 'react';
+import { useSearch } from '@/providers/SearchProvider';
 
 import {
   DropdownMenu,
@@ -23,6 +24,7 @@ export default function Home() {
     id: number;
     name: string;
   } | null>(null);
+  const { search } = useSearch();
 
   const page = 1;
   const limit = 20;
@@ -30,12 +32,13 @@ export default function Home() {
   const params = useMemo(
     () =>
       ({
+        q: search,
         categoryId: selectedCategory ?? undefined,
         authorId: selectedAuthor?.id ?? undefined,
         page,
         limit,
       } as GetAllBooksRequest),
-    [selectedCategory, selectedAuthor, page, limit]
+    [selectedCategory, selectedAuthor, page, limit, search]
   );
 
   const {
@@ -54,7 +57,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      {selectedCategory || selectedAuthor ? (
+      {selectedCategory || selectedAuthor || search ? (
         <main className='flex flex-col pt-20'>
           {selectedAuthor && (
             <div className='mb-4'>
