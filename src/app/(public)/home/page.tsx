@@ -7,6 +7,7 @@ import { useSearch } from '@/providers/SearchProvider';
 // Hooks
 import { useCategories } from '@/hooks/useCategories';
 import { useBooks } from '@/hooks/useBooks';
+import { useAuthors } from '@/hooks/useAuthors';
 import type { GetAllBooksRequest } from '@/types/Books.type';
 
 // Components
@@ -14,6 +15,7 @@ import Header from '@/components/container/Header';
 import Hero from './partials/hero';
 import Categories from './partials/categories';
 import Recommended from './partials/recommended';
+import Authors from './partials/authors';
 
 // Shadcn
 import {
@@ -48,17 +50,17 @@ export default function Home() {
     [selectedCategory, selectedAuthor, page, limit, search]
   );
 
-  const {
-    categories,
-    loading: categoriesLoading,
-    error: categoriesError,
-  } = useCategories();
+  const { categories } = useCategories();
 
-  const {
-    allBooks,
-    isLoading: booksLoading,
-    hasError: booksError,
-  } = useBooks(params);
+  const { allBooks, recommendBooks } = useBooks(params);
+
+  const { authors } = useAuthors();
+
+  const authorBookCount = recommendBooks.reduce((acc, book) => {
+    const authorId = book.author.id;
+    acc[authorId] = (acc[authorId] || 0) + 1;
+    return acc;
+  }, {} as Record<number, number>);
 
   return (
     <>
@@ -117,7 +119,17 @@ export default function Home() {
           <Categories setSelectedCategory={setSelectedCategory} />
 
           {/* Recommended Books Section */}
-          <Recommended setSelectedAuthor={setSelectedAuthor} />
+          <Recommended
+            books={recommendBooks}
+            setSelectedAuthor={setSelectedAuthor}
+          />
+
+          {/* Authors Section */}
+          <Authors
+            authorBookCount={authorBookCount}
+            authors={authors}
+            setSelectedAuthor={setSelectedAuthor}
+          />
         </main>
       )}
     </>
