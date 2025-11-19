@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useAuth } from '@/providers/AuthProvider';
 import { useSearch } from '@/providers/SearchProvider';
 import { useRouter } from 'next/navigation';
+import { useScroll, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Header = () => {
   const router = useRouter();
@@ -19,12 +21,28 @@ const Header = () => {
     router.push('/cart');
   };
 
+  const { scrollY } = useScroll();
+  const background = useTransform(
+    scrollY,
+    [0, 100],
+    ['rgba(12,13,13,0', 'rgba(12,13,13,0.5)']
+  );
+  const backdropBlur = useTransform(
+    scrollY,
+    [0, 100],
+    ['blur(0px)', 'blur(10px)']
+  );
+
   return (
     <>
-      <header
+      <motion.header
         className={`fixed top-0 z-50 w-full flex-between py-3 px-4 md:py-4.75 md:px-30 ${
           searchOpen ? 'gap-4' : ''
         }`}
+        style={{
+          background,
+          backdropFilter: backdropBlur,
+        }}
       >
         <Link href='/' className='flex items-center gap-3.75'>
           <Image
@@ -35,14 +53,14 @@ const Header = () => {
             className='md:hidden'
             loading='eager'
           />
-          <Image
-            src='/icons/icon-logo-text.svg'
-            alt='logo'
-            width={155}
-            height={42}
-            className='hidden md:block'
-            loading='eager'
-          />
+          <div className='relative hidden md:block w-[155px] h-[42px]'>
+            <Image
+              src='/icons/icon-logo-text.svg'
+              alt='logo'
+              fill
+              loading='eager'
+            />
+          </div>
         </Link>
 
         {/* Mobile */}
@@ -149,8 +167,6 @@ const Header = () => {
               <input
                 type='text'
                 placeholder='Search Book'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
                 className='w-full '
               />
             </div>
@@ -224,7 +240,7 @@ const Header = () => {
             </>
           )}
         </div>
-      </header>
+      </motion.header>
 
       {/* Mobile Menu */}
       <div

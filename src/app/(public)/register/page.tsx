@@ -6,14 +6,14 @@ import RegisterForm from './partials/register-form';
 export default function RegisterPage() {
   return (
     <main className='flex flex-col justify-center min-h-screen w-[80vw] max-w-[400px] gap-5 overflow-auto mx-auto'>
-      <Image
-        src='/icons/icon-logo-text.svg'
-        alt='logo'
-        width={121.79}
-        height={33}
-        className='block'
-        loading='eager'
-      />
+      <div className='relative w-[121.79px] h-[33px]'>
+        <Image
+          src='/icons/icon-logo-text.svg'
+          alt='logo'
+          fill
+          loading='eager'
+        />
+      </div>
 
       <div className='flex flex-col gap-0.5 md:gap-2'>
         <h3 className='text-display-xs font-bold text-neutral-950 md:text-display-sm'>

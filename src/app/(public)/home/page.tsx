@@ -1,12 +1,21 @@
 'use client';
 
-import Header from '@/components/container/Header';
-import { useCategories } from '@/hooks/useCategories';
-import { useBooks } from '@/hooks/useBooks';
 import Link from 'next/link';
 import { useState, useMemo } from 'react';
 import { useSearch } from '@/providers/SearchProvider';
 
+// Hooks
+import { useCategories } from '@/hooks/useCategories';
+import { useBooks } from '@/hooks/useBooks';
+import type { GetAllBooksRequest } from '@/types/Books.type';
+
+// Components
+import Header from '@/components/container/Header';
+import Hero from './partials/hero';
+import Categories from './partials/categories';
+import Recommended from './partials/recommended';
+
+// Shadcn
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,8 +23,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-
-import type { GetAllBooksRequest } from '@/types/Books.type';
 
 export default function Home() {
   // State for selected category filter
@@ -48,7 +55,6 @@ export default function Home() {
   } = useCategories();
 
   const {
-    recommendBooks,
     allBooks,
     isLoading: booksLoading,
     hasError: booksError,
@@ -103,66 +109,15 @@ export default function Home() {
           )}
         </main>
       ) : (
-        <main className='flex flex-col pt-20'>
-          <p>Home</p>
+        <main className='flex flex-col pt-20 px-4 md:px-0 gap-6 max-w-[1200px] mx-auto'>
+          {/* Hero Section */}
+          <Hero />
 
-          {/* Categories */}
-          {categoriesLoading ? (
-            <p>Loading categories...</p>
-          ) : categoriesError ? (
-            <p>Error loading categories: {categoriesError}</p>
-          ) : (
-            <div className='mt-4'>
-              <h2 className='text-2xl font-bold mb-4'>Categories</h2>
-              <div className='grid grid-cols-4 gap-4'>
-                {categories.map((category) => (
-                  <div
-                    key={category.id}
-                    className='p-4 border rounded-lg cursor-pointer'
-                    onClick={() => setSelectedCategory(category.id)}
-                  >
-                    {category.name}
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Categories Section */}
+          <Categories setSelectedCategory={setSelectedCategory} />
 
-          {/* Books */}
-          {booksLoading ? (
-            <p>Loading books...</p>
-          ) : booksError ? (
-            <p>Error loading books: {booksError}</p>
-          ) : (
-            <div className='mt-4'>
-              <h2 className='text-2xl font-bold mb-4'>Books</h2>
-              <div className='grid grid-cols-4 gap-4'>
-                {recommendBooks.map((book) => (
-                  <div
-                    key={book.id}
-                    className='p-4 border rounded-lg cursor-pointer flex flex-col gap-2'
-                  >
-                    <Link href={`/books/${book.id}`}>
-                      Judul Buku: {book.title}
-                    </Link>
-                    <div
-                      onClick={() =>
-                        setSelectedAuthor({
-                          id: book.author.id,
-                          name: book.author.name,
-                        })
-                      }
-                      className='mt-2'
-                    >
-                      <h3 className='font-display-2xl'>
-                        Penulis: {book.author.name}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          )}
+          {/* Recommended Books Section */}
+          <Recommended setSelectedAuthor={setSelectedAuthor} />
         </main>
       )}
     </>
