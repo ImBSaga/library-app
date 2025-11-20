@@ -10,6 +10,10 @@ const buttonVariants = cva('text-text-md font-bold rounded-[100px]', {
       default: 'bg-primary-500 text-neutral-25 hover:bg-primary-500/90',
       secondary:
         'border border-neutral-300 text-neutral-950 hover:bg-neutral-300/80',
+      destructive:
+        'bg-destructive text-destructive-foreground hover:bg-destructive/90',
+      outline:
+        'border border-neutral-300 text-neutral-950 hover:bg-neutral-300/80',
     },
     size: {
       default: 'h-12 w-[163px] has-[>svg]:px-3',
