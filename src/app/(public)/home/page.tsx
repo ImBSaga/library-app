@@ -16,6 +16,7 @@ import Hero from './partials/hero';
 import Categories from './partials/categories';
 import Recommended from './partials/recommended';
 import Authors from './partials/authors';
+import Footer from '@/components/container/Footer';
 
 // Shadcn
 import {
@@ -132,6 +133,8 @@ export default function Home() {
           />
         </main>
       )}
+      <div className='h-4 md:h-29'></div>
+      <Footer />
     </>
   );
 }
