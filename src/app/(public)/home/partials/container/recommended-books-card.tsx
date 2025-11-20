@@ -9,7 +9,10 @@ export default function RecommendedBooksCard({
   setSelectedAuthor: (author: { id: number; name: string }) => void;
 }) {
   return (
-    <Link href={`/books/${book.id}`} className='cursor-pointer flex flex-col'>
+    <Link
+      href={`/books/${book.id}`}
+      className='cursor-pointer flex flex-col shadow-[0px_0px_20px_0px_#CBCACA40]'
+    >
       <div className='w-43 h-64.5 md:w-full md:h-84 bg-amber-100 rounded-t-[12px]'>
         No Picture
       </div>

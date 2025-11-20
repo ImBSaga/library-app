@@ -17,6 +17,7 @@ import Categories from './partials/categories';
 import Recommended from './partials/recommended';
 import Authors from './partials/authors';
 import Footer from '@/components/container/Footer';
+import AllBooks from './partials/all-books';
 
 // Shadcn
 import {
@@ -98,17 +99,7 @@ export default function Home() {
           {allBooks.length === 0 ? (
             <p>No books found</p>
           ) : (
-            <div className='grid grid-cols-4 gap-4'>
-              {allBooks.map((book) => (
-                <Link
-                  href={`/books/${book.id}`}
-                  key={book.id}
-                  className='p-4 border rounded-lg cursor-pointer'
-                >
-                  {book.title}
-                </Link>
-              ))}
-            </div>
+            <AllBooks books={allBooks} setSelectedAuthor={setSelectedAuthor} />
           )}
         </main>
       ) : (

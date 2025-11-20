@@ -1,4 +1,3 @@
-import { useBooks } from '@/hooks/useBooks';
 import RecommendedBooksCard from './container/recommended-books-card';
 import type { RecommendBooks } from '@/types/Books.type';
 
